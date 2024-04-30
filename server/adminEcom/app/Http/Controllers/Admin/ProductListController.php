@@ -32,8 +32,9 @@ class ProductListController extends Controller
         }
     }
 
-    public function getProductListByCategory(Request $request){
-        try{
+    public function getProductListByCategory(Request $request)
+    {
+        try {
             $category = $request->category;
             $product_list = ProductList::where('category', $category)->get();
             $count = count($product_list);
@@ -43,7 +44,7 @@ class ProductListController extends Controller
             ];
 
             return response()->json($data);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Log::error('An error occurred: ' . $e->getMessage());
 
             return response()->json([
@@ -53,8 +54,9 @@ class ProductListController extends Controller
         }
     }
 
-    public function getProductListBySubCategory(Request $request){
-        try{
+    public function getProductListBySubCategory(Request $request)
+    {
+        try {
             $subcategory = $request->subcategory;
             $product_list = ProductList::where('subcategory', $subcategory)->get();
             $count = count($product_list);
@@ -64,7 +66,7 @@ class ProductListController extends Controller
             ];
 
             return response()->json($data);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Log::error('An error occurred: ' . $e->getMessage());
 
             return response()->json([
@@ -72,5 +74,33 @@ class ProductListController extends Controller
                 'message' => 'An error occurred while processing your request.',
             ], 500);
         }
+    }
+
+    public function getProductBySearch(Request $request)
+    {
+        try {
+            $key = $request->key;
+            $products = ProductList::where('title', 'LIKE', "%{$key}%")->get();
+
+            $response = [
+                "message" => "Get product by key successfully",
+                'data' => $products
+            ];
+            return response()->json($response);
+        } catch (\Exception $e) {
+            Log::error('An error occurred: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'Internal server error',
+                'message' => 'An error occurred while processing your request.',
+            ], 500);
+        }
+    }
+
+    public function similarProduct(Request $request)
+    {
+        $subcategory = $request->subcategory;
+        $product_list = ProductList::where('subcategory', $subcategory)->orderBy('id', 'desc')->limit(6)->get();
+        return $product_list;
     }
 }
