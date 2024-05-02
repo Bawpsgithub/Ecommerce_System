@@ -12,11 +12,13 @@ use App\Http\Controllers\Admin\ProductDetailController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\ProductCartController;
+use App\Http\Controllers\Admin\FavouriteController;
 
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\ForgetController;
 use App\Http\Controllers\User\ResetController;
 use App\Http\Controllers\User\UserController;
+use App\Models\Favourites;
 use App\Models\ProductCart;
 
 /*
@@ -76,8 +78,14 @@ Route::get('/search/{key}', [ProductListController::class, 'getProductBySearch']
 Route::get('/similar/{subcategory}', [ProductListController::class, 'similarProduct']);
 
 //Review API
-Route::get('/reviewlist/{id}',[ReviewController::class, 'reviewList']);
+Route::get('/reviewlist/{id}', [ReviewController::class, 'reviewList']);
 
 //Product cart API
-Route::post('/addtocart',[ProductCartController::class, 'addtoCart']);
-Route::get('cartcount/{product_code}',[ProductCartController::class, 'cartCount']);
+Route::post('/addtocart', [ProductCartController::class, 'addtoCart']);
+Route::get('/cartcount', [ProductCartController::class, 'cartCount']);
+Route::get('/cartlist/{email}', [ProductCartController::class, 'getCartByEmail']);
+
+//Favourite API
+Route::post('/favourite/{product_code}/{email}', [FavouriteController::class, 'addFavourite']);
+Route::get('/favourite/{email}', [FavouriteController::class, 'getFavourite']);
+Route::delete('/favourite/{product_code}/{email}', [FavouriteController::class, 'removeFavourite']);
