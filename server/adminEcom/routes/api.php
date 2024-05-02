@@ -82,10 +82,16 @@ Route::get('/reviewlist/{id}', [ReviewController::class, 'reviewList']);
 
 //Product cart API
 Route::post('/addtocart', [ProductCartController::class, 'addtoCart']);
-Route::get('/cartcount', [ProductCartController::class, 'cartCount']);
+Route::get('/cartcount/{email}', [ProductCartController::class, 'cartCount']);
 Route::get('/cartlist/{email}', [ProductCartController::class, 'getCartByEmail']);
+Route::delete('/remove-cart-item/{id}', [ProductCartController::class, 'removeCartById']);
+Route::put('/plus-cart-item/{id}', [ProductCartController::class, 'plusItemCart']);
+Route::put('/minus-cart-item/{id}', [ProductCartController::class, 'minusItemCart']);
 
 //Favourite API
 Route::post('/favourite/{product_code}/{email}', [FavouriteController::class, 'addFavourite']);
 Route::get('/favourite/{email}', [FavouriteController::class, 'getFavourite']);
 Route::delete('/favourite/{product_code}/{email}', [FavouriteController::class, 'removeFavourite']);
+
+//Cart order API
+Route::post('/cartorder', [ProductCartController::class, 'CartOrder']);
