@@ -39,8 +39,8 @@ use App\Models\ProductCart;
 //Auth API
 Route::post('/login', [AuthController::class, 'Login']);
 Route::post('/register', [AuthController::class, 'Register']);
-Route::post('/forgetpassword', [ForgetController::class, 'ForgetPassword']);
-Route::post('/resetpassword', [ResetController::class, 'ResetPassword']);
+Route::post('/forget-password', [ForgetController::class, 'ForgetPassword']);
+Route::post('/reset-password', [ResetController::class, 'ResetPassword']);
 Route::get('/user', [UserController::class, 'User'])->middleware('auth:api');
 
 //Visitor API
@@ -58,15 +58,15 @@ Route::get('/siteinfo', [SiteInfoController::class, 'getAllSiteInfo']);
 Route::get('/category', [CategoryController::class, 'getCategoryByGroup']);
 
 //Product API
-Route::get('/productlistbyremark/{remark}', [ProductListController::class, 'getProductListByRemark']);
-Route::get('/productlistbycategory/{category}', [ProductListController::class, 'getProductListByCategory']);
-Route::get('/productlistbysubcategory/{subcategory}', [ProductListController::class, 'getProductListBySubCategory']);
+Route::get('/product-list-by-remark/{remark}', [ProductListController::class, 'getProductListByRemark']);
+Route::get('/product-list-by-category/{category}', [ProductListController::class, 'getProductListByCategory']);
+Route::get('/product-list-by-subcategory/{subcategory}', [ProductListController::class, 'getProductListBySubCategory']);
 
 //Home Slider API
 Route::get('/homeslider', [HomeSliderController::class, 'getAllHomeSlider']);
 
 //Product detail API
-Route::get('productdetail/{id}', [ProductDetailController::class, 'getProductDetail']);
+Route::get('product-detail/{id}', [ProductDetailController::class, 'getProductDetail']);
 
 //Notification API
 Route::get('notifications', [NotificationController::class, 'getAllNotification']);
@@ -78,7 +78,7 @@ Route::get('/search/{key}', [ProductListController::class, 'getProductBySearch']
 Route::get('/similar/{subcategory}', [ProductListController::class, 'similarProduct']);
 
 //Review API
-Route::get('/reviewlist/{id}', [ReviewController::class, 'reviewList']);
+Route::get('/review-list/{id}', [ReviewController::class, 'reviewList']);
 
 //Product cart API
 Route::post('/addtocart', [ProductCartController::class, 'addtoCart']);
@@ -94,4 +94,4 @@ Route::get('/favourite/{email}', [FavouriteController::class, 'getFavourite']);
 Route::delete('/favourite/{product_code}/{email}', [FavouriteController::class, 'removeFavourite']);
 
 //Cart order API
-Route::post('/cartorder', [ProductCartController::class, 'CartOrder']);
+Route::post('/cart-order', [ProductCartController::class, 'CartOrder']);
