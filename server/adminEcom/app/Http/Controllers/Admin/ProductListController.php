@@ -15,7 +15,6 @@ class ProductListController extends Controller
             $remark = $request->remark;
             $product_list = ProductList::where('remark', $remark)->get();
             $count = count($product_list);
-            echo $count;
             $data = [
                 'message' => "Get total {$count} products by remark successfully",
                 'data' => $product_list
