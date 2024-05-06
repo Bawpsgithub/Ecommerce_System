@@ -56,8 +56,9 @@ class ProductListController extends Controller
     public function getProductListBySubCategory(Request $request)
     {
         try {
+            $category = $request->category;
             $subcategory = $request->subcategory;
-            $product_list = ProductList::where('subcategory', $subcategory)->get();
+            $product_list = ProductList::where('category', $category)->where('subcategory', $subcategory)->get();
             $count = count($product_list);
             $data = [
                 'message' => "Get total {$count} products by sub category successfully",

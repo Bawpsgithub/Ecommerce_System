@@ -60,7 +60,7 @@ Route::get('/category', [CategoryController::class, 'getCategoryByGroup']);
 //Product API
 Route::get('/product-list-by-remark/{remark}', [ProductListController::class, 'getProductListByRemark']);
 Route::get('/product-list-by-category/{category}', [ProductListController::class, 'getProductListByCategory']);
-Route::get('/product-list-by-subcategory/{subcategory}', [ProductListController::class, 'getProductListBySubCategory']);
+Route::get('/product-list-by-subcategory/{category}/{subcategory}', [ProductListController::class, 'getProductListBySubCategory']);
 
 //Home Slider API
 Route::get('/homeslider', [HomeSliderController::class, 'getAllHomeSlider']);
@@ -85,8 +85,8 @@ Route::post('/addtocart', [ProductCartController::class, 'addtoCart']);
 Route::get('/cartcount/{email}', [ProductCartController::class, 'cartCount']);
 Route::get('/cartlist/{email}', [ProductCartController::class, 'getCartByEmail']);
 Route::delete('/remove-cart-item/{id}', [ProductCartController::class, 'removeCartById']);
-Route::put('/plus-cart-item/{id}', [ProductCartController::class, 'plusItemCart']);
-Route::put('/minus-cart-item/{id}', [ProductCartController::class, 'minusItemCart']);
+Route::get('/plus-cart-item/{id}', [ProductCartController::class, 'plusItemCart']);
+Route::get('/minus-cart-item/{id}', [ProductCartController::class, 'minusItemCart']);
 
 //Favourite API
 Route::post('/favourite/{product_code}/{email}', [FavouriteController::class, 'addFavourite']);
